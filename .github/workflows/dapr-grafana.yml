@@ -18,7 +18,9 @@ jobs:
       - name: Parse release version and set REL_VERSION
         run: python ./.github/scripts/get_release_version.py
       - name: Creating Archive for grafana dashboards
-        run:  tar -zcf ./grafana_archive/grafana_dashboards.tar.gz ./grafana
+        run: |
+          mkdir -p ./grafana_archive
+          tar -zcf ./grafana_archive/grafana_dashboards.tar.gz ./grafana
       - name: publish grafana dashboards to github
         if: startswith(github.ref, 'refs/tags/v')
         run: |
